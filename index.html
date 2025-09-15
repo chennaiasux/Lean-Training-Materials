@@ -15,8 +15,26 @@
       text-align: center;
     }
     h1 {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       color: #2c3e50;
+    }
+    .video-card {
+      display: inline-block;
+      margin-bottom: 30px;
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .video-card img {
+      width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .video-card img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
     .grid {
       display: grid;
@@ -53,6 +71,14 @@
 </head>
 <body>
   <h1>📘 Lean Training Portal</h1>
+
+  <!-- Intro to Lean video -->
+  <a class="video-card" href="intro-to-lean.mp4">
+    <img src="thumb-itl.jpg" alt="Intro to Lean Video Thumbnail">
+    <div>🎥 Intro to Lean</div>
+  </a>
+
+  <!-- Training Topics Grid -->
   <div class="grid">
     <a class="card" href="3-M/">
       <div class="icon">⚖️</div>
@@ -71,11 +97,11 @@
       Kaizen
     </a>
     <a class="card" href="Standard-Work/">
-      <div class="icon">🔧</div>
+      <div class="icon">📋</div>
       Standard Work
     </a>
     <a class="card" href="VSM/">
-      <div class="icon">🔧</div>
+      <div class="icon">🌐</div>
       Value Stream Mapping
     </a>
     <a class="card" href="Problem-Solving-Approaches/">
