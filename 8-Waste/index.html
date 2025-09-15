@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lean - 8 Wastes</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      padding: 20px; 
+      max-width: 900px; 
+      margin: auto; 
+      background: #f9fafc; 
+      color: #222;
+    }
+    h1 { 
+      text-align: center; 
+      margin-bottom: 0.8rem; 
+      font-size: 2rem; 
+      color: #004080;
+    }
+    p.intro {
+      text-align: center; 
+      margin-bottom: 2rem; 
+      color: #555;
+    }
+    .video-card {
+      background: #fff; 
+      border-radius: 10px; 
+      padding: 16px; 
+      margin: 20px 0; 
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+    .video-card video {
+      max-width: 100%; 
+      height: auto; 
+      display: block; 
+      border-radius: 8px; 
+    }
+    .video-card p {
+      margin: 10px 0 0; 
+      font-weight: bold; 
+      color: #444;
+    }
+    .controls {
+      margin-top: 8px;
+    }
+    .controls label {
+      font-size: 0.9rem;
+      margin-right: 6px;
+      color: #333;
+    }
+    .controls select {
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+    }
+    a.back { 
+      display: block; 
+      margin-top: 20px; 
+      text-decoration: none; 
+      text-align: center; 
+      font-weight: bold; 
+      color: #004080; 
+    }
+    a.back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>8 Wastes on Lean</h1>
+  <p class="intro">Select a video to watch and adjust playback speed if needed:</p>
+
+  <div class="video-card">
+    <video id="video1" controls poster="thumb-8w.jpg">
+      <source src="8waste.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <p>8 W (2:42)</p>
+    <div class="controls">
+      <label for="speed1">Playback speed:</label>
+      <select id="speed1">
+        <option value="0.5">0.5×</option>
+        <option value="0.75">0.75×</option>
+        <option value="1" selected>1× (Normal)</option>
+        <option value="1.25">1.25×</option>
+        <option value="1.5">1.5×</option>
+        <option value="2">2×</option>
+      </select>
+    </div>
+  </div>
+
+  <a class="back" href="../">⬅ Back to Main Menu</a>
+
+  <script>
+    const video = document.getElementById('video1');
+    const speed = document.getElementById('speed1');
+    speed.addEventListener('change', () => {
+      video.playbackRate = parseFloat(speed.value);
+    });
+  </script>
+</body>
+</html>
