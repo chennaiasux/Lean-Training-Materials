@@ -53,7 +53,7 @@
       border: 1px solid #ccc;
     }
 
-    /* Global Back Button (same style as Problem Solving Tools) */
+    /* Styled Global Back Button (same as Problem Solving Tools) */
     .back-btn-container {
       text-align: center;
       margin-top: 30px;
@@ -102,7 +102,7 @@
     </div>
   </div>
 
-  <!-- Global Back Button -->
+  <!-- Global Back Button (styled same as other pages) -->
   <div class="back-btn-container">
     <a class="back-btn" onclick="goBack()">⬅ Back</a>
   </div>
@@ -117,9 +117,8 @@
       });
     });
 
-    // Back function (same logic as Problem Solving Tools)
+    // Back button function
     function goBack() {
-      // Only one video here, but consistent with your other pages
       const video = document.getElementById("vid3M");
       if (video) { video.pause(); }
       window.history.back();
