@@ -80,6 +80,8 @@
       border-radius: 4px;
       border: 1px solid #ccc;
     }
+
+    /* Global Back Button */
     .back-btn {
       display: inline-block;
       margin-top: 16px;
@@ -89,6 +91,10 @@
       cursor: pointer;
     }
     .back-btn:hover { text-decoration: underline; }
+    .back-btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
@@ -132,7 +138,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -153,7 +158,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -174,7 +178,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -195,9 +198,12 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
+
+  <!-- Global Back Button (centered at bottom) -->
+  <div class="back-btn-container">
+    <a class="back-btn" onclick="goBack()">⬅ Back to Tools</a>
   </div>
 
   <script>
@@ -215,12 +221,23 @@
 
     // Back function
     function goBack() {
+      let isAnyVideoVisible = false;
       playerViews.forEach(view => {
+        if (view.style.display === "block") {
+          isAnyVideoVisible = true;
+        }
         view.style.display = "none";
         const vid = view.querySelector("video");
         if (vid) { vid.pause(); }
       });
-      iconGrid.style.display = "grid";
+
+      if (isAnyVideoVisible) {
+        // If inside a video, go back to grid
+        iconGrid.style.display = "grid";
+      } else {
+        // If already on main page, go back in history
+        window.history.back();
+      }
     }
 
     // Playback speed
