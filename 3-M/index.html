@@ -5,42 +5,40 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>3M Concept</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      padding: 20px; 
-      max-width: 900px; 
-      margin: auto; 
-      background: #f9fafc; 
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9fafc;
       color: #222;
     }
-    h1 { 
-      text-align: center; 
-      margin-bottom: 0.8rem; 
-      font-size: 2rem; 
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
       color: #004080;
     }
-    p.intro {
-      text-align: center; 
-      margin-bottom: 2rem; 
-      color: #555;
+
+    /* Video Card */
+    .player-view {
+      max-width: 900px;
+      margin: auto;
     }
-    .video-card {
-      background: #fff; 
-      border-radius: 10px; 
-      padding: 16px; 
-      margin: 20px 0; 
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    .player-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-    .video-card video {
-      max-width: 100%; 
-      height: auto; 
-      display: block; 
-      border-radius: 8px; 
+    .player-card video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
     }
-    .video-card p {
-      margin: 10px 0 0; 
-      font-weight: bold; 
-      color: #444;
+    .player-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
     }
     .controls {
       margin-top: 8px;
@@ -48,67 +46,82 @@
     .controls label {
       font-size: 0.9rem;
       margin-right: 6px;
-      color: #333;
     }
     .controls select {
       padding: 4px 8px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      font-size: 0.9rem;
     }
 
-    /* Back button formatting (same as previous page) */
+    /* Global Back Button (same style as Problem Solving Tools) */
     .back-btn-container {
       text-align: center;
       margin-top: 30px;
     }
     .back-btn {
       display: inline-block;
-      text-decoration: none;
+      padding: 10px 18px;
+      background: #004080;
+      color: #fff;
+      border-radius: 8px;
       font-weight: bold;
-      color: #004080;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
       cursor: pointer;
     }
-    .back-btn:hover { text-decoration: underline; }
+    .back-btn:hover {
+      background: #0066cc;
+      transform: translateY(-2px);
+    }
+    .back-btn:active {
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
   <h1>3 M Principle</h1>
-  <p class="intro">Select a video to watch and adjust playback speed if needed:</p>
 
-  <div class="video-card">
-    <video id="video1" controls poster="thumb-3m.jpg">
-      <source src="3m.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p>3 M (3:00)</p>
-    <div class="controls">
-      <label for="speed1">Playback speed:</label>
-      <select id="speed1">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1× (Normal)</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
-      </select>
+  <!-- Player View -->
+  <div class="player-view" id="video1">
+    <div class="player-card">
+      <video controls poster="thumb-3m.jpg" id="vid3M">
+        <source src="3m.mp4" type="video/mp4">
+      </video>
+      <p>3 M (3:00)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vid3M">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
     </div>
   </div>
 
-  <!-- Back Button -->
+  <!-- Global Back Button -->
   <div class="back-btn-container">
     <a class="back-btn" onclick="goBack()">⬅ Back</a>
   </div>
 
   <script>
-    const video = document.getElementById('video1');
-    const speed = document.getElementById('speed1');
-    speed.addEventListener('change', () => {
-      video.playbackRate = parseFloat(speed.value);
+    // Playback speed control
+    document.querySelectorAll(".speed-control").forEach(select => {
+      const videoId = select.getAttribute("data-video");
+      const video = document.getElementById(videoId);
+      select.addEventListener("change", () => {
+        video.playbackRate = parseFloat(select.value);
+      });
     });
 
-    // Back function like before
+    // Back function (same logic as Problem Solving Tools)
     function goBack() {
+      // Only one video here, but consistent with your other pages
+      const video = document.getElementById("vid3M");
+      if (video) { video.pause(); }
       window.history.back();
     }
   </script>
