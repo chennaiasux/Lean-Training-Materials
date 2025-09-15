@@ -5,42 +5,68 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Problem Solving Tools</title>
   <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      padding: 20px; 
-      max-width: 900px; 
-      margin: auto; 
-      background: #f9fafc; 
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9fafc;
       color: #222;
     }
-    h1 { 
-      text-align: center; 
-      margin-bottom: 0.8rem; 
-      font-size: 2rem; 
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
       color: #004080;
     }
-    p.intro {
-      text-align: center; 
-      margin-bottom: 2rem; 
-      color: #555;
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
     }
-    .video-card {
-      background: #fff; 
-      border-radius: 10px; 
-      padding: 16px; 
-      margin: 20px 0; 
+    .video-icon {
+      cursor: pointer;
+      background: #fff;
+      border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.2s;
+      text-align: center;
     }
-    .video-card video {
-      max-width: 100%; 
-      height: auto; 
-      display: block; 
-      border-radius: 8px; 
+    .video-icon:hover { transform: scale(1.05); }
+    .video-icon img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
-    .video-card p {
-      margin: 10px 0 0; 
-      font-weight: bold; 
+    .video-icon p {
+      margin: 8px 0;
+      font-weight: bold;
       color: #444;
+    }
+
+    /* Full player view */
+    .player-view {
+      display: none;
+      max-width: 900px;
+      margin: auto;
+    }
+    .player-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .player-card video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .player-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
     }
     .controls {
       margin-top: 8px;
@@ -48,132 +74,184 @@
     .controls label {
       font-size: 0.9rem;
       margin-right: 6px;
-      color: #333;
     }
     .controls select {
       padding: 4px 8px;
       border-radius: 4px;
       border: 1px solid #ccc;
-      font-size: 0.9rem;
     }
-    a.back { 
-      display: block; 
-      margin-top: 20px; 
-      text-decoration: none; 
-      text-align: center; 
-      font-weight: bold; 
-      color: #004080; 
+    .back-btn {
+      display: inline-block;
+      margin-top: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #004080;
+      cursor: pointer;
     }
-    a.back:hover { text-decoration: underline; }
+    .back-btn:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <h1>Problem Solving Tools</h1>
-  <p class="intro">Select a video to watch and adjust playback speed if needed:</p>
 
-  <div class="video-card">
-    <video id="video1" controls poster="thumb-5y.jpg">
-      <source src="5_why.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p>How to use 5-Why (5:51)</p>
-    <div class="controls">
-      <label for="speed1">Playback speed:</label>
-      <select id="speed1" class="speed-control" data-video="video1">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1× (Normal)</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
-      </select>
+  <!-- Icon Grid -->
+  <div class="video-grid" id="iconGrid">
+    <div class="video-icon" data-target="video1">
+      <img src="thumb-5y.jpg" alt="5 Why">
+      <p>5-Why</p>
+    </div>
+    <div class="video-icon" data-target="video2">
+      <img src="thumb-5y,eg.jpg" alt="5 Why Example">
+      <p>5-Why Example</p>
+    </div>
+    <div class="video-icon" data-target="video3">
+      <img src="thumb-fb.jpg" alt="Fishbone">
+      <p>Fishbone</p>
+    </div>
+    <div class="video-icon" data-target="video4">
+      <img src="thumb-fta.jpg" alt="FTA">
+      <p>FTA</p>
+    </div>
+    <div class="video-icon" data-target="video5">
+      <img src="thumb-7qc.jpg" alt="7 QC Tools">
+      <p>7 QC Tools</p>
     </div>
   </div>
 
-  <div class="video-card">
-    <video id="video2" controls poster="thumb-5y,eg.jpg">
-      <source src="5_why_example.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p>Example of a 5 Why Analysis (1:30)</p>
-    <div class="controls">
-      <label for="speed2">Playback speed:</label>
-      <select id="speed2" class="speed-control" data-video="video2">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1× (Normal)</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
-      </select>
+  <!-- Player Views -->
+  <div class="player-view" id="video1">
+    <div class="player-card">
+      <video controls poster="thumb-5y.jpg" id="vid5y">
+        <source src="5_why.mp4" type="video/mp4">
+      </video>
+      <p>How to use 5-Why (5:51)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vid5y">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
-  <div class="video-card">
-    <video id="video3" controls poster="thumb-fb.jpg">
-      <source src="fishbone_cause_effect_or_ishikawa_diagram.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p>Fishbone / Cause & Effect / Ishikawa diagram (2:06)</p>
-    <div class="controls">
-      <label for="speed3">Playback speed:</label>
-      <select id="speed3" class="speed-control" data-video="video3">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1× (Normal)</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
-      </select>
+  <div class="player-view" id="video2">
+    <div class="player-card">
+      <video controls poster="thumb-5y,eg.jpg" id="vid5yEg">
+        <source src="5_why_example.mp4" type="video/mp4">
+      </video>
+      <p>Example of a 5-Why Analysis (1:30)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vid5yEg">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
-  <div class="video-card">
-    <video id="video4" controls poster="thumb-fta.jpg">
-      <source src="fta.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p>Fault Tree Analysis (10:29)</p>
-    <div class="controls">
-      <label for="speed3">Playback speed:</label>
-      <select id="speed3" class="speed-control" data-video="video3">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1× (Normal)</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
-      </select>
+  <div class="player-view" id="video3">
+    <div class="player-card">
+      <video controls poster="thumb-fb.jpg" id="vidFishbone">
+        <source src="fishbone_cause_effect_or_ishikawa_diagram.mp4" type="video/mp4">
+      </video>
+      <p>Fishbone / Cause & Effect / Ishikawa (2:06)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidFishbone">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
-  <div class="video-card">
-    <video id="video5" controls poster="thumb-7qc.jpg">
-      <source src="7qc_tools.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <p>7 QC Tools (14:46)</p>
-    <div class="controls">
-      <label for="speed3">Playback speed:</label>
-      <select id="speed3" class="speed-control" data-video="video3">
-        <option value="0.5">0.5×</option>
-        <option value="0.75">0.75×</option>
-        <option value="1" selected>1× (Normal)</option>
-        <option value="1.25">1.25×</option>
-        <option value="1.5">1.5×</option>
-        <option value="2">2×</option>
-      </select>
+  <div class="player-view" id="video4">
+    <div class="player-card">
+      <video controls poster="thumb-fta.jpg" id="vidFTA">
+        <source src="fta.mp4" type="video/mp4">
+      </video>
+      <p>Fault Tree Analysis (10:29)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidFTA">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
-  <a class="back" href="../">⬅ Back to Main Menu</a>
+  <div class="player-view" id="video5">
+    <div class="player-card">
+      <video controls poster="thumb-7qc.jpg" id="vid7QC">
+        <source src="7qc_tools.mp4" type="video/mp4">
+      </video>
+      <p>7 QC Tools (14:46)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vid7QC">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+  </div>
 
   <script>
-    // Attach listeners to all speed selectors
-    document.querySelectorAll('.speed-control').forEach(select => {
-      const videoId = select.getAttribute('data-video');
+    const iconGrid = document.getElementById("iconGrid");
+    const playerViews = document.querySelectorAll(".player-view");
+
+    // Show selected video
+    document.querySelectorAll(".video-icon").forEach(icon => {
+      icon.addEventListener("click", () => {
+        const target = icon.getAttribute("data-target");
+        iconGrid.style.display = "none";
+        document.getElementById(target).style.display = "block";
+      });
+    });
+
+    // Back function
+    function goBack() {
+      playerViews.forEach(view => {
+        view.style.display = "none";
+        const vid = view.querySelector("video");
+        if (vid) { vid.pause(); }
+      });
+      iconGrid.style.display = "grid";
+    }
+
+    // Playback speed
+    document.querySelectorAll(".speed-control").forEach(select => {
+      const videoId = select.getAttribute("data-video");
       const video = document.getElementById(videoId);
-      select.addEventListener('change', () => {
+      select.addEventListener("change", () => {
         video.playbackRate = parseFloat(select.value);
       });
     });
