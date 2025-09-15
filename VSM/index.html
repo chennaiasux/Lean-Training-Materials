@@ -80,6 +80,12 @@
       border-radius: 4px;
       border: 1px solid #ccc;
     }
+
+    /* Global Back Button */
+    .back-btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
     .back-btn {
       display: inline-block;
       margin-top: 16px;
@@ -140,7 +146,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -161,7 +166,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -182,7 +186,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -203,7 +206,6 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
   </div>
 
@@ -224,12 +226,12 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
+  </div>
 
   <div class="player-view" id="video6">
     <div class="player-card">
-      <video controls poster="thumb-vsm-cp5.jpg" id="vidcp6">
+      <video controls poster="thumb-vsm-cp6.jpg" id="vidcp6">
         <source src="vsm-cp6.mp4" type="video/mp4">
       </video>
       <p>Future VSM (10:10)</p>
@@ -244,8 +246,12 @@
           <option value="2">2×</option>
         </select>
       </div>
-      <a class="back-btn" onclick="goBack()">⬅ Back</a>
     </div>
+  </div>
+
+  <!-- Global Back Button -->
+  <div class="back-btn-container">
+    <a class="back-btn" onclick="goBack()">⬅ Back</a>
   </div>
 
   <script>
@@ -263,12 +269,23 @@
 
     // Back function
     function goBack() {
+      let anyVisible = false;
       playerViews.forEach(view => {
+        if (view.style.display === "block") {
+          anyVisible = true;
+        }
         view.style.display = "none";
         const vid = view.querySelector("video");
         if (vid) { vid.pause(); }
       });
-      iconGrid.style.display = "grid";
+
+      if (anyVisible) {
+        // If a video was open, go back to grid
+        iconGrid.style.display = "grid";
+      } else {
+        // If already on grid, go back in browser history
+        window.history.back();
+      }
     }
 
     // Playback speed
