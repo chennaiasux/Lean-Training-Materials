@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Problem Solving Tools</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9fafc;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #004080;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .video-icon {
+      cursor: pointer;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.2s;
+      text-align: center;
+    }
+    .video-icon:hover { transform: scale(1.05); }
+    .video-icon img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .video-icon p {
+      margin: 8px 0;
+      font-weight: bold;
+      color: #444;
+    }
+
+    /* Full player view */
+    .player-view {
+      display: none;
+      max-width: 900px;
+      margin: auto;
+    }
+    .player-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .player-card video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .player-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    .controls {
+      margin-top: 8px;
+    }
+    .controls label {
+      font-size: 0.9rem;
+      margin-right: 6px;
+    }
+    .controls select {
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 16px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #004080;
+      cursor: pointer;
+    }
+    .back-btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>Value Stream Mapping</h1>
+
+  <!-- Icon Grid -->
+  <div class="video-grid" id="iconGrid">
+    <div class="video-icon" data-target="video1">
+      <img src="thumb-vsm-cp1.jpg" alt="VSM Chapter 1 - Intro">
+      <p>Chapter 1 - Intro</p>
+    </div>
+    <div class="video-icon" data-target="video2">
+      <img src="thumb-vsm-cp2.jpg" alt="VSM Chapter 2 - Essential Tips">
+      <p>Chapter 2 - Ess. Tips</p>
+    </div>
+    <div class="video-icon" data-target="video3">
+      <img src="thumb-vsm-cp3.jpg" alt="VSM Chapter 3 - Creating VSM">
+      <p>Chapter 3 - Creating VSM</p>
+    </div>
+    <div class="video-icon" data-target="video4">
+      <img src="thumb-vsm-cp4.jpg" alt="VSM Chapter 4 - Super Market Concept">
+      <p>Chapter 4 - Super Market</p>
+    </div>
+    <div class="video-icon" data-target="video5">
+      <img src="thumb-vsm-cp5.jpg" alt="VSM Chapter 5 - Understanding Pacemakers">
+      <p>Chapter 5 Pacemaker Process</p>
+    </div>
+    <div class="video-icon" data-target="video6">
+      <img src="thumb-vsm-cp6.jpg" alt="VSM Chapter 6 - Future VSM">
+      <p>Chapter 6 Future VSM</p>
+    </div>
+  </div>
+
+  <!-- Player Views -->
+  <div class="player-view" id="video1">
+    <div class="player-card">
+      <video controls poster="thumb-vsm-cp1.jpg" id="vidcp1">
+        <source src="vsm-cp1.mp4" type="video/mp4">
+      </video>
+      <p>Introduction to VSM (3:58)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidcp1">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+  </div>
+
+  <div class="player-view" id="video2">
+    <div class="player-card">
+      <video controls poster="thumb-vsm-cp2.jpg" id="vidcp2">
+        <source src="vsm-cp2.mp4" type="video/mp4">
+      </video>
+      <p>Essential Steps for VSM (5:30)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidcp2">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+  </div>
+
+  <div class="player-view" id="video3">
+    <div class="player-card">
+      <video controls poster="thumb-vsm-cp3.jpg" id="vidcp3">
+        <source src="vsm-cp3.mp4" type="video/mp4">
+      </video>
+      <p>Creating VSM (8:32)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidcp3">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+  </div>
+
+  <div class="player-view" id="video4">
+    <div class="player-card">
+      <video controls poster="thumb-vsm-cp4.jpg" id="vidcp4">
+        <source src="vsm-cp4.mp4" type="video/mp4">
+      </video>
+      <p>Super Market Concept (6:25)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidcp4">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+  </div>
+
+  <div class="player-view" id="video5">
+    <div class="player-card">
+      <video controls poster="thumb-vsm-cp5.jpg" id="vidcp5">
+        <source src="vsm-cp5.mp4" type="video/mp4">
+      </video>
+      <p>Understanding Pacemaker Process (7:55)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidcp5">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+
+  <div class="player-view" id="video6">
+    <div class="player-card">
+      <video controls poster="thumb-vsm-cp5.jpg" id="vidcp6">
+        <source src="vsm-cp6.mp4" type="video/mp4">
+      </video>
+      <p>Future VSM (10:10)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidcp6">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+      <a class="back-btn" onclick="goBack()">⬅ Back</a>
+    </div>
+  </div>
+
+  <script>
+    const iconGrid = document.getElementById("iconGrid");
+    const playerViews = document.querySelectorAll(".player-view");
+
+    // Show selected video
+    document.querySelectorAll(".video-icon").forEach(icon => {
+      icon.addEventListener("click", () => {
+        const target = icon.getAttribute("data-target");
+        iconGrid.style.display = "none";
+        document.getElementById(target).style.display = "block";
+      });
+    });
+
+    // Back function
+    function goBack() {
+      playerViews.forEach(view => {
+        view.style.display = "none";
+        const vid = view.querySelector("video");
+        if (vid) { vid.pause(); }
+      });
+      iconGrid.style.display = "grid";
+    }
+
+    // Playback speed
+    document.querySelectorAll(".speed-control").forEach(select => {
+      const videoId = select.getAttribute("data-video");
+      const video = document.getElementById(videoId);
+      select.addEventListener("change", () => {
+        video.playbackRate = parseFloat(select.value);
+      });
+    });
+  </script>
+</body>
+</html>
