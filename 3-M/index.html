@@ -56,15 +56,20 @@
       border: 1px solid #ccc;
       font-size: 0.9rem;
     }
-    a.back { 
-      display: block; 
-      margin-top: 20px; 
-      text-decoration: none; 
-      text-align: center; 
-      font-weight: bold; 
-      color: #004080; 
+
+    /* Back button formatting (same as previous page) */
+    .back-btn-container {
+      text-align: center;
+      margin-top: 30px;
     }
-    a.back:hover { text-decoration: underline; }
+    .back-btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: bold;
+      color: #004080;
+      cursor: pointer;
+    }
+    .back-btn:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -90,7 +95,10 @@
     </div>
   </div>
 
-  <a class="back" href="../">⬅ Back to Main Menu</a>
+  <!-- Back Button -->
+  <div class="back-btn-container">
+    <a class="back-btn" onclick="goBack()">⬅ Back</a>
+  </div>
 
   <script>
     const video = document.getElementById('video1');
@@ -98,6 +106,11 @@
     speed.addEventListener('change', () => {
       video.playbackRate = parseFloat(speed.value);
     });
+
+    // Back function like before
+    function goBack() {
+      window.history.back();
+    }
   </script>
 </body>
 </html>
