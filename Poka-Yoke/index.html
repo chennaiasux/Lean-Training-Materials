@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Poka-Yoke</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9fafc;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #004080;
+    }
+
+    /* Video Card */
+    .player-view {
+      max-width: 900px;
+      margin: auto;
+    }
+    .player-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .player-card video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .player-card p {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #333;
+    }
+    .controls {
+      margin-top: 8px;
+    }
+    .controls label {
+      font-size: 0.9rem;
+      margin-right: 6px;
+    }
+    .controls select {
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    /* Styled Global Back Button (same as Problem Solving Tools) */
+    .back-btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .back-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #004080;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      cursor: pointer;
+    }
+    .back-btn:hover {
+      background: #0066cc;
+      transform: translateY(-2px);
+    }
+    .back-btn:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <h1>Poka-Yoke</h1>
+
+  <!-- Player View -->
+  <div class="player-view" id="video1">
+    <div class="player-card">
+      <video controls poster="thumb-Poka-Yoke.jpg" id="vidPoka-Yoke">
+        <source src="Poka-Yoke.mp4" type="video/mp4">
+      </video>
+      <p>Poka-Yoke (2:05)</p>
+      <div class="controls">
+        <label>Playback speed:</label>
+        <select class="speed-control" data-video="vidPoka-Yoke">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Back Button (styled same as other pages) -->
+  <div class="back-btn-container">
+    <a class="back-btn" onclick="goBack()">⬅ Back</a>
+  </div>
+
+  <script>
+    // Playback speed control
+    document.querySelectorAll(".speed-control").forEach(select => {
+      const videoId = select.getAttribute("data-video");
+      const video = document.getElementById(videoId);
+      select.addEventListener("change", () => {
+        video.playbackRate = parseFloat(select.value);
+      });
+    });
+
+    // Back button function
+    function goBack() {
+      const video = document.getElementById("vidPoka-Yoke");
+      if (video) { video.pause(); }
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
